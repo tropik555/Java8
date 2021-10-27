@@ -1,38 +1,32 @@
 package lambdasinaction.chap1;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
-public class FilteringApples {
-
-    public static void main(String... args) {
-
+public class ApplePractice {
+    public static void main(String[] args) {
         List<Apple> inventory = Arrays.asList(new Apple(80, "green"),
                 new Apple(155, "green"),
                 new Apple(120, "red"));
 
-        // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-        List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
+        List<Apple> greenApples=filterApples(inventory,ApplePractice::isGreenApple);
         System.out.println(greenApples);
 
-        // [Apple{color='green', weight=155}]
-        List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
+        List<Apple> heavyApples=filterApples(inventory,ApplePractice::isHeavyApple);
         System.out.println(heavyApples);
 
-        // [Apple{color='green', weight=80}, Apple{color='green', weight=155}]
-        List<Apple> greenApples2 = filterApples(inventory, (Apple a) -> "green".equals(a.getColor()));
+        List<Apple>greenApples2=filterApples(inventory,(Apple a)->"green".equals(a.getColor()));
         System.out.println(greenApples2);
 
-        // [Apple{color='green', weight=155}]
-        List<Apple> heavyApples2 = filterApples(inventory, (Apple a) -> a.getWeight() > 150);
+        List<Apple> heavyApples2=filterApples(inventory,(Apple a)->a.getWeight()>150);
         System.out.println(heavyApples2);
 
-        // []
-        List<Apple> weirdApples = filterApples(inventory, (Apple a) -> a.getWeight() < 80 ||
-                "brown".equals(a.getColor()));
+        List<Apple> weirdApples=filterApples(inventory,(Apple a)->a.getWeight()<80||"brown".equals(a.getColor()));
         System.out.println(weirdApples);
-    }
 
+    }
 
 
     public static List<Apple> filterGreenApples(List<Apple> inventory) {
@@ -41,6 +35,7 @@ public class FilteringApples {
             if ("green".equals(apple.getColor())) {
                 result.add(apple);
             }
+
         }
         return result;
     }
@@ -73,6 +68,7 @@ public class FilteringApples {
         return result;
     }
 
+
     public static class Apple {
         private int weight = 0;
         private String color = "";
@@ -86,7 +82,7 @@ public class FilteringApples {
             return weight;
         }
 
-        public void setWeight(Integer weight) {
+        public void setWeight(int weight) {
             this.weight = weight;
         }
 
@@ -98,12 +94,12 @@ public class FilteringApples {
             this.color = color;
         }
 
+        @Override
         public String toString() {
             return "Apple{" +
-                    "color='" + color + '\'' +
-                    ", weight=" + weight +
+                    "weight=" + weight +
+                    ", color='" + color + '\'' +
                     '}';
         }
     }
-
 }
